@@ -14,6 +14,7 @@
 
 ## 代码结构
 src\main\java\com\nii\soot\checker\UrlSootChecker.java 检测应用中存在的url地址
+src\main\java\com\nii\soot\checker\EmailSootChecker.java 检测应用中存在的email地址
 
 
 
