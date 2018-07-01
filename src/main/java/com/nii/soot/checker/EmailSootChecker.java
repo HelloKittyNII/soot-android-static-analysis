@@ -2,7 +2,6 @@ package com.nii.soot.checker;
 
 
 import com.nii.soot.core.BasicChecker;
-import org.apache.http.conn.util.InetAddressUtils;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -17,17 +16,17 @@ import java.util.regex.Pattern;
  * @author wzj
  * @create 2018-07-01 16:02
  **/
-public class UrlSootChecker extends BasicChecker
+public class EmailSootChecker extends BasicChecker
 {
     /**
-     * 匹配url正则表达式
+     * 匹配email正则表达式
      */
-    private String urlReg = "(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]";
+    private String emailReg = "[\\w-.]+@[\\w-]+(.[\\w_-]+)+";
 
     /**
      * 正则表达式
      */
-    private Pattern pattern = Pattern.compile(urlReg);
+    private Pattern emailPattern = Pattern.compile(emailReg);
 
     /**
      * 检查APK应用中的url
@@ -50,12 +49,12 @@ public class UrlSootChecker extends BasicChecker
                     continue;
                 }
 
-                //遍历方法中的每一行,检查url
+                //遍历方法中的每一行,检查email
                 List<ValueBox> useBoxes = sootMethod.getActiveBody().getUseBoxes();
                 for (ValueBox valueBox : useBoxes)
                 {
                     String content = valueBox.toString();
-                    Matcher matcher = pattern.matcher(content);
+                    Matcher matcher = emailPattern.matcher(content);
                     if (!matcher.find())
                     {
                         continue;
@@ -72,6 +71,6 @@ public class UrlSootChecker extends BasicChecker
 
     public static void main(String[] args)
     {
-        new UrlSootChecker().analyze();
+        new EmailSootChecker().analyze();
     }
 }
