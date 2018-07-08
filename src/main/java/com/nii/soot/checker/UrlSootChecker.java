@@ -2,7 +2,6 @@ package com.nii.soot.checker;
 
 
 import com.nii.soot.core.BasicChecker;
-import org.apache.http.conn.util.InetAddressUtils;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
